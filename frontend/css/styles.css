@@ -1,0 +1,40 @@
+
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+  margin: 0;
+}
+
+header {
+  background: #222;
+  color: white;
+  padding: 1rem;
+}
+
+nav a {
+  color: #fff;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+#song-list {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.song-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+pre {
+  background: #eee;
+  padding: 1rem;
+  border-radius: 8px;
+}
