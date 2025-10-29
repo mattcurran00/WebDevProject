@@ -1,0 +1,28 @@
+{
+  "name": "webdev",
+  "version": "1.0.0",
+  "description": "**Students**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattcurran00/WebDevProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattcurran00/WebDevProject/issues"
+  },
+  "homepage": "https://github.com/mattcurran00/WebDevProject#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
