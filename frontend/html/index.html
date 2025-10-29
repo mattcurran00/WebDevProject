@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Musicker</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../css/style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Musicker</title>
 
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-<header>
-    <h1>Test HEADER</h1>
-<nav>
-    <a href="">Home</a>
-    <a href="/browse.html">Browse</a>
-    <a href="/login.html">Login</a>
-</nav>
-<input id="search" type="text" placeholder="Search songs or artists"/>
-</header>
-<main id="songlist">
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Musicker Logo" />
+      <span>Musicker</span>
+    </div>
+    <input type="text" placeholder="Search songs or artists" class="search-bar" />
+  </header>
 
-</main>
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <button id="toggleSidebar">☰</button>
+      <ul>
+        <li><a href="/login.html"><i class="fa-solid fa-user"></i><span> Login</span></a></li>
+        <li><a href="#"><i class="fa-solid fa-heart"></i><span> Saved Songs</span></a></li>
+        <li><a href="#"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
+      </ul>
+    </nav>
 
+    <!-- Main content -->
+    <main class="main-content">
+      <h1>Welcome to Musicker!</h1>
+      <p>Discover tabs, chords, and songs with ease.</p>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>

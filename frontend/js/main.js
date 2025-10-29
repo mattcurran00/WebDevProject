@@ -1,6 +1,14 @@
 // JS for dyniamically rendering the songs after being chosen
 //will have to actually implement database communication as im just manually
 //entering data for it to show
+
+const toggleBtn = document.getElementById('toggleSidebar');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+});
+
 const songs = [
   { id: 1, title: "Forget Her", artist: "Jeff Buckley" },
   { id: 2, title: "Creep", artist: "Radiohead" },
