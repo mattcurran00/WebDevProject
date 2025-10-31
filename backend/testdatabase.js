@@ -1,4 +1,4 @@
-import pool from './models/db.js';
+import pool from './db.js';
 //feel free to get rid of this shite but its kinda handy to see if we can interact
 const createTables = async () => {
   try {

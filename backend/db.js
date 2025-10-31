@@ -23,3 +23,7 @@ export default pool; // i think? i actually don't know at this stage
 //if not i am the first
 //anyways this little thing should let us reuse this connection pretty much
 //anywhere in the backend
+
+//yeah so jus import this using : const result = await pool.query("SELECT * FROM users WHERE id=$1", [userId]);
+//or something like that
+//i think thats how it works
