@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Title</title>
+    <title>Login to Musicker</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>       
     <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/login.css"/>
 </head>
 <body>
+    <header class="header">
+        <h1>Musicker Login</h1>
+        <p class="tagline">Sign in to your account</p>
+    </header>
+
+    <main class ="login-main">
+
+
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+        <p id="error"></p>
+        <script src="validation.js"></script>
+    </main>
+
+    <p class="signup">Don't have an account? <a href="signup.html">Sign up here</a></p>
 
 </body>
 </html>

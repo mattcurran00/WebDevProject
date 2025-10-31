@@ -1,0 +1,110 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Basic page layout */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #000000, #2d2d2d);
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+body {
+  animation: fadeIn 0.7s ease-in-out;
+}
+/* fade in animation
+try use this everywhere else cos it acc looks sick */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header styling */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: #f2ba52;
+}
+
+.header .tagline {
+  color: #ccc;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.signup {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Login form */
+.login-container {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login-form input::placeholder {
+  color: #bbb;
+}
+
+.login-form input:focus {
+  outline: 2px solid #00c2ff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Button styling */
+.login-form button {
+  background: #00c2ff;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.login-form button:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Error message */
+#error {
+  color: #ff6b6b;
+  text-align: center;
+  font-size: 0.9rem;
+}

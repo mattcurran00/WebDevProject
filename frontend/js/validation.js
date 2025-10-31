@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if(!data.loggedIn){
             //redirect to login if not logged in
 
-            window.location.href = "../html/login.html";
+            window.location.href = "./html/login.html";
             return;
         }
 
         loadSavedSongs();
     } catch (error) {
         console.error("kurwa", error);
-        window.location.href = "../html/login.html";
+        window.location.href = "./html/login.html";
     }
 });
