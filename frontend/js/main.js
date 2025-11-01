@@ -2,11 +2,11 @@
 //will have to actually implement database communication as im just manually
 //entering data for it to show
 
-const toggleBtn = document.getElementById('toggleSidebar');
 const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('toggleBtn');
 
-toggleBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('collapsed');
+toggleBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("collapsed");
 });
 
 const songs = [

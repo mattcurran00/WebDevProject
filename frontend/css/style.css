@@ -115,3 +115,12 @@ body {
   flex: 1;
   padding: 1rem;
 }
+
+#toggle-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 32px 32px;
+}
