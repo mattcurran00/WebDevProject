@@ -148,3 +148,59 @@ body {
   margin-top: 20px;
   margin-right: auto;
 }
+
+/* tile effect on main page */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;                 /* spacing between tiles */
+  padding: 1rem;             /* spacing inside the container */
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Each tile (use an anchor for semantics) */
+.song-card {
+  display: block;            /* anchor behaves like a card */
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: #6b24bc5e;       /* card background */
+  box-shadow: 0 4px 10px rgba(12, 20, 30, 0.06);
+  text-decoration: none;     /* remove underline */
+  color: inherit;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  min-height: 76px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Hover/Focus states */
+.song-card:hover,
+.song-card:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(12, 20, 30, 0.12);
+  outline: none;
+}
+
+/* Keyboard focus visible (for accessibility) */
+.song-card:focus-visible {
+  box-shadow: 0 0 0 4px rgba(100, 150, 255, 0.18);
+}
+
+/* Title/artist typography inside card */
+.song-card strong {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.song-card .artist {
+  font-size: 0.92rem;
+  color: #555;
+}
+
+/* Small screens - increase spacing if you want */
+@media (max-width: 420px) {
+  .song-grid { gap: 0.75rem; padding: 0.75rem; }
+  .song-card { padding: 0.85rem; }
+}
