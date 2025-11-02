@@ -141,6 +141,10 @@ body {
 #song-list {
   list-style: square;
   padding: 0;
-  border-style: ridge;
+  border-style: groove;
   border-color: goldenrod;
+  border-width: thick;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-right: auto;
 }
