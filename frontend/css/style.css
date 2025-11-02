@@ -137,3 +137,10 @@ body {
 #toggleBtn:hover {
   background-color: #555;    /* darker on hover */
 }
+
+#song-list {
+  list-style: square;
+  padding: 0;
+  border-style: ridge;
+  border-color: goldenrod;
+}

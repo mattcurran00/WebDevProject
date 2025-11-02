@@ -1,4 +1,4 @@
-// JS for dyniamically rendering the songs after being chosen
+// JS for dynamically rendering the songs after being chosen
 //will have to actually implement database communication as im just manually
 //entering data for it to show
 
