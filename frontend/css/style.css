@@ -204,3 +204,19 @@ body {
   .song-grid { gap: 0.75rem; padding: 0.75rem; }
   .song-card { padding: 0.85rem; }
 }
+
+.search-button {
+  display: position-right;
+  align-items: right;
+  border-radius: 20%;
+  gap: 1px;
+  width : 2rem;
+  height: 2rem;
+  color: black;
+}
+
+.fa-search {
+  width: 1rem;
+  height: 1rem;
+  align-items: center;
+}

@@ -8,7 +8,7 @@ dotenv.config();
 
 const{ Pool } = pkg;
 
-const pool = new Pool({
+export const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
@@ -16,7 +16,7 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 });
 
-export default pool; // i think? i actually don't know at this stage
+export default pool; // default export kept for compatibility
 
 // do u reckon anyone ever made like a diary of them descending into madness
 //in a js file

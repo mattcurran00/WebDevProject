@@ -25,12 +25,19 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "../frontend")));
 
+
 app.use("/api", authRoutes);
 app.use("/api", songRoutes);
 
 // Catch-all to serve index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+// Use "/*" so path-to-regexp correctly matches a catch-all in this environment
+// Use a RegExp to match any path for the catch-all (avoids path-to-regexp name errors)
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/html/index.html"));
+});
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/css"));
 });
 
 const PORT = 3000;
