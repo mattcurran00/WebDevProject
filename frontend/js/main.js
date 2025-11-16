@@ -67,3 +67,42 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+// Database test section
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("testBtn");
+  const results = document.getElementById("testResults");
+  if (!btn || !results) return;  // page doesn't have section
+
+  btn.addEventListener("click", async () => {
+    results.innerHTML = "<li>Loading...</li>";
+
+    try {
+      const res = await fetch("/api/saved-songs", { credentials: "include" });
+
+      if (!res.ok) {
+        results.innerHTML = "<li>Not logged in or DB error.</li>";
+        return;
+      }
+
+      const songs = await res.json();
+      results.innerHTML = "";
+
+      if (songs.length === 0) {
+        results.innerHTML = "<li>No songs in database.</li>";
+        return;
+      }
+
+      songs.forEach(song => {
+        const li = document.createElement("li");
+        li.textContent = `${song.title} — ${song.artist}`;
+        results.appendChild(li);
+      });
+
+    } catch (err) {
+      console.error(err);
+      results.innerHTML = "<li>Database connection failed.</li>";
+    }
+  });
+});
+
+

@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS
+// CORS (you could remove this if frontend is same origin, but it's fine)
 app.use(
   cors({
     origin: true,
@@ -30,6 +30,12 @@ app.use(
     secret: "secret key", // change for real
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 
@@ -41,12 +47,12 @@ app.use(express.static(frontendPath));
 app.use("/api/auth", authRoutes);
 app.use("/api", songRoutes);
 
-// Catch-all → index.html
+// Home route → index.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(frontendPath, "html", "index.html"));
 });
 
-const PORT = 3000;
-app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
-);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
