@@ -33,17 +33,30 @@
     </nav>
 
     <!-- Main content -->
-    <main class="main-content">
+     <main class="main-content">
+  <section class="saved-wrapper">
+    <header class="saved-header">
       <h1>Saved Songs</h1>
-      <ul id="saved-list"></ul>
-    </main>
+      <p>View, edit, or remove your favourite tracks.</p>
+    </header>
 
-    <script src="../js/validation.js"></script>
-    <script src="../js/saved.js"></script>
+    <!-- CREATE NEW SAVED SONG -->
+    <form id="add-song-form" class="saved-form">
+      <input type="text" id="new-title" placeholder="Song title" required />
+      <input type="text" id="new-artist" placeholder="Artist" required />
+      <input type="text" id="new-song-id" placeholder="Song ID (optional)" />
+      <button type="submit">Add Saved Song</button>
+    </form>
 
-  </div>
+    <!-- LIST OF SAVED SONGS -->
+    <div id="saved-list" class="saved-list">Loading...</div>
+  </section>
 
-  <script src="../validation.js"></script>
-  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/saved.js"></script>
+</main>
+</div>
+
+  
 </body>
 </html>
