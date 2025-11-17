@@ -139,8 +139,13 @@ body {
 }
 
 #song-list {
+  display : flex;
+  /*flex-direction: column;*/
+  flex-wrap: wrap;
+  align-content: flex-start;
   list-style: square;
-  padding: 0;
+  padding: 10px;
+  gap: 10px;
   border-style: groove;
   border-color: goldenrod;
   border-width: thick;
@@ -386,6 +391,4 @@ body {
   .saved-song .actions {
     align-self: flex-end;
   }
-}
-
 }
