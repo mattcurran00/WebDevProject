@@ -30,14 +30,12 @@ songs.forEach(song => {
   songList.appendChild(div);
 }); 
 */ 
-import { supabase } from './lib/supabase.js';
 
 async function loadSongs() {
-  // Fetch songs from the database
-  const { data: songs, error } = await supabase
+  const { data: songs, error } = await window.supabase
     .from('songs')
     .select('*')
-    .order('id', { ascending: true }); // optional ordering
+    .order('id', { ascending: true });
 
   if (error) {
     console.error("Error fetching songs:", error);
