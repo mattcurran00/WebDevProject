@@ -5,17 +5,25 @@
 const sidebar = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggleBtn');
 
+let page = 0;          // Which "chunk" are we on? (0 = first 25)
+const limit = 25;      // How many to fetch each time?
+let loading = false;   // Prevent double-clicking
+
 toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("collapsed");
 });
 
+async function loadSongs(pageNumber = 0) {
+  const start = pageNumber * limit;
+  const end = start + limit - 1;
 
+  console.log(`Fetching songs ${start} to ${end}`);
 
-async function loadSongs() {
   const { data: songs, error } = await window.supabase
-    .from('songs')
-    .select('*')
-    .order('id', { ascending: true });
+    .from("songs")
+    .select("*")
+    .order("id", { ascending: true })
+    .range(start, end);
 
   if (error) {
     console.error("Error fetching songs:", error);
@@ -25,35 +33,43 @@ async function loadSongs() {
   return songs;
 }
 
-// or: const supabase = require('./lib/supabase');
-
-async function renderSongs() {
-  const songList = document.getElementById('song-list');
+async function renderSongs(append = false) {
+  const songList = document.getElementById("song-list");
   if (!songList) return;
 
-  // Clear existing content
-  songList.innerHTML = '';
+  if (!append) {
+    songList.innerHTML = ""; // First load = clear list
+  }
 
-  const songs = await loadSongs();  // fetch from DB
+  // Prevent spam-clicking
+  if (loading) return;
+  loading = true;
 
+  // Load songs for current page
+  const songs = await loadSongs(page);
+
+  // If no songs returned, hide Load More button
   if (songs.length === 0) {
-    songList.innerHTML = '<li>No songs in the database.</li>';
+    document.getElementById("loadMoreBtn").style.display = "none";
+    loading = false;
     return;
   }
 
-  songs.forEach(song => {
-    const a = document.createElement('a');
-    a.className = 'song-card';
+  // Render list
+  songs.forEach((song) => {
+    const a = document.createElement("a");
+    a.className = "song-card";
     a.href = `/song.html?id=${encodeURIComponent(song.id)}`;
-    a.setAttribute('aria-label', `${song.title} by ${song.artist}`);
+    a.setAttribute("aria-label", `${song.title} by ${song.artist}`);
     a.innerHTML = `
-      <strong>${escapeHtml(song.title)}</strong>
-      <span class="artist">${escapeHtml(song.artist)}</span>
-    `;
+        <strong>${escapeHtml(song.title)}</strong>
+        <span class="artist">${escapeHtml(song.artist)}</span>
+      `;
     songList.appendChild(a);
   });
-}
 
+  loading = false;
+}
 // Call the render function once DOM is ready
 document.addEventListener('DOMContentLoaded', renderSongs);
 
@@ -66,6 +82,20 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Load first 25 songs
+  renderSongs(false);
+
+  // Setup Load More
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", () => {
+      page++;                // increase page number
+      renderSongs(true);     // append songs
+    });
+  }
+});
 
 
 // Database test section
