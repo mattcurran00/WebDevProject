@@ -26,7 +26,7 @@ const { data, error } = await supabase
   .from('songs')
   .select('*');
 
-console.log(data);
+if (data != null) console.log('Songs Loaded'); else console.log('Error loading songs:', error);
 
 import express from "express";
 import { pool } from "../db.js";
