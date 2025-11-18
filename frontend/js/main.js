@@ -30,6 +30,31 @@ songs.forEach(song => {
   songList.appendChild(div);
 }); 
 */ 
+import { supabase } from './lib/supabase.js';
+
+async function loadSongs() {
+  // Fetch songs from the database
+  const { data: songs, error } = await supabase
+    .from('songs')
+    .select('*')
+    .order('id', { ascending: true }); // optional ordering
+
+  if (error) {
+    console.error("Error fetching songs:", error);
+    return [];
+  }
+
+  return songs;
+}
+
+// or: const supabase = require('./lib/supabase');
+
+/*const { data, error } = await supabase
+  .from('songs')
+  .select('*');
+
+console.log(data);
+
 
 const songs = [
   { id: 3, title: "Hallelujah", artist: "Leonard Cohen" },
@@ -61,30 +86,39 @@ const songs = [
   { id: 29, title: "Blue Monday", artist: "New Order" },
   { id: 30, title: "Karma Police", artist: "Radiohead" }
 
-];
+];*/
 
-const songList = document.getElementById('song-list');
+async function renderSongs() {
+  const songList = document.getElementById('song-list');
+  if (!songList) return;
 
-// Clear existing content 
-songList.innerHTML = '';
+  // Clear existing content
+  songList.innerHTML = '';
 
-songs.forEach(song => {
-  // Create an anchor so it's naturally focusable/clickable and copyable
-  const a = document.createElement('a');
-  a.className = 'song-card';
-  a.href = `/song.html?id=${encodeURIComponent(song.id)}`;
-  a.setAttribute('aria-label', `${song.title} by ${song.artist}`);
+  const songs = await loadSongs();  // fetch from DB
 
-  // content
-  a.innerHTML = `
-    <strong>${escapeHtml(song.title)}</strong>
-    <span class="artist">${escapeHtml(song.artist)}</span>
-  `;
+  if (songs.length === 0) {
+    songList.innerHTML = '<li>No songs in the database.</li>';
+    return;
+  }
 
-  songList.appendChild(a);
-});
+  songs.forEach(song => {
+    const a = document.createElement('a');
+    a.className = 'song-card';
+    a.href = `/song.html?id=${encodeURIComponent(song.id)}`;
+    a.setAttribute('aria-label', `${song.title} by ${song.artist}`);
+    a.innerHTML = `
+      <strong>${escapeHtml(song.title)}</strong>
+      <span class="artist">${escapeHtml(song.artist)}</span>
+    `;
+    songList.appendChild(a);
+  });
+}
 
-// Simple helper to avoid accidental HTML injection if titles come from user input
+// Call the render function once DOM is ready
+document.addEventListener('DOMContentLoaded', renderSongs);
+
+// Helper function remains the same
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -93,6 +127,7 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 }
+
 
 // Database test section
 document.addEventListener("DOMContentLoaded", () => {

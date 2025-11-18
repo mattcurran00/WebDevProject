@@ -18,6 +18,16 @@
 // "bosh"
 
 // backend/routes/songs.js
+import { supabase } from '../lib/supabase.js'; 
+
+// or: const supabase = require('./lib/supabase');
+
+const { data, error } = await supabase
+  .from('songs')
+  .select('*');
+
+console.log(data);
+
 import express from "express";
 import { pool } from "../db.js";
 
