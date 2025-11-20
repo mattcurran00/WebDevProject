@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 */
 // signup.js
-const signupForm = document.getElementById("signupForm");
+const signupForm = document.getElementById("signup-form");
 
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -56,7 +56,7 @@ signupForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    const res = await fetch("/signup", {
+    const res = await fetch("api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -77,4 +77,15 @@ signupForm.addEventListener("submit", async (e) => {
     console.error("Network or parsing error:", err);
     alert("Something went wrong. Check console for details.");
   }
+
+    console.log("Signup payload:", { username, password });
+    console.log("Password hash:", password_hash);
+
+    const { data, error } = await supabase
+        .from("users")
+        .insert([{ username, password_hash }])
+        .select();
+
+    console.log("Supabase response:", { data, error });
+
 });

@@ -132,6 +132,9 @@ router.post("/signup", async (req, res) => {
       .select();
 
     if (error) return res.status(500).json({ success: false, message: "DB error", error });
+    //debugging
+    console.log("Supabase insert response:", data, error);
+
 
     return res.status(201).json({ success: true, user: data[0] });
   } catch (err) {

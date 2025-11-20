@@ -18,4 +18,4 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
-console.log("ENV CHECK:", process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+console.log("ENV CHECK:", process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
