@@ -1,36 +1,36 @@
 // frontend/js/login.js
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("loginForm");
-  const errorEl = document.getElementById("error");
+const loginForm = document.getElementById("loginForm");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    errorEl.textContent = "";
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // send session cookie
-        body: JSON.stringify({ username, password }),
-      });
+  try {
+    const res = await fetch("api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        errorEl.textContent = data.error || "Login failed";
-        return;
-      }
+    const data = await res.json();
+    //console.error("Server response:", data);
+    if (data.success) {
+    //alert("Login successful!");
+    // redirect user
+    window.location.href = "/";
 
-      // Logged in successfully
-      window.location.href = "/html/saved.html"; //provisonal
-    } catch (err) {
-      console.error(err);
-      errorEl.textContent = "Something went wrong, try again.";
-    }
-  });
+    } else {
+    //alert("Login failed: " + data.message);
+}
+
+    //debugging
+    //alert("Server error: " + JSON.stringify(data));
+
+  } catch (err) {
+    console.error("Network or parsing error:", err);
+    alert("Something went wrong. Check console for details.");
+  }
 });
+

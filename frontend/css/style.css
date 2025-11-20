@@ -170,7 +170,7 @@ body {
   display: block;            /* anchor behaves like a card */
   padding: 1rem 1.25rem;
   border-radius: 12px;
-  background: #6b24bc5e;       /* card background */
+  background: #9130ff5e;       /* card background */
   box-shadow: 0 4px 10px rgba(12, 20, 30, 0.06);
   text-decoration: none;     /* remove underline */
   color: inherit;

@@ -3,7 +3,7 @@
 // isnt logged in. Still  have to figure out the API part and paths 
 // will be a mess for the minute
 
-document.addEventListener("DOMContentLoaded", async () => {
+/*document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("/api/auth/check-login", {
       credentials: "include",
@@ -23,3 +23,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.location.href = "/html/login.html";
   }
 });
+*/
