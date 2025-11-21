@@ -115,6 +115,7 @@ import session from "express-session";
 dotenv.config();
 
 import authRoutes from "./routes/auth.js";
+import songRoutes from "./routes/songs.js";
 
 const app = express();
 const __dirname = path.resolve();
@@ -122,9 +123,6 @@ const __dirname = path.resolve();
 // --- Middleware ---
 // Parse JSON bodies for API requests
 app.use(express.json());
-
-// Serve static files from frontend folder (CSS, JS, images, etc.)
-app.use(express.static(path.join(__dirname, "../frontend")));
 
 app.use(
   session({
@@ -134,6 +132,14 @@ app.use(
     cookie: { secure: false }
   })
 );
+
+// --- API Routes ---
+app.use("/api/auth", authRoutes);
+app.use("/api/songs", songRoutes);
+
+// Serve static files from frontend folder (CSS, JS, images, etc.)
+app.use(express.static(path.join(__dirname, "../frontend")));
+
 
 // --- HTML routes ---
 // Clean URLs: /signup, /login, /
@@ -156,12 +162,6 @@ app.get("/saved", (req, res) => {
 app.get("/settings", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/html/settings.html"));
 });
-
-// --- API routes ---
-app.use("/api/auth", authRoutes);
-// You can add other API routes like songs later:
-// import songRoutes from "./routes/songs.js";
-// app.use("/api/songs", songRoutes);
 
 // --- Start server ---
 const PORT = process.env.PORT || 3000;

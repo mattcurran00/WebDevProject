@@ -126,6 +126,31 @@ import { supabase } from "../lib/supabase.js";
 const router = express.Router();
 
 // -------------------------------------
+// SEARCH songs by title or artist
+// -------------------------------------
+
+router.get("/search", async (req, res) => {
+    const q = req.query.q;
+
+    if (!q || q.trim() === "") {
+        return res.json({ results: [] });
+    }
+
+    const { data, error } = await supabase
+        .from("songs")
+        .select("*")
+        .or(`title.ilike.%${q}%,artist.ilike.%${q}%`)
+        .limit(10);
+
+    if (error) {
+        console.error("Supabase search error:", error);
+        return res.status(500).json({ error: "Database search error" });
+    }
+
+    res.json({ results: data });
+});
+
+// -------------------------------------
 // GET saved songs for logged-in user
 // -------------------------------------
 router.get("/saved-songs", async (req, res) => {

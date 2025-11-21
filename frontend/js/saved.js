@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     list.innerHTML = "Loading your saved songs...";
 
     try {
-      const res = await fetch("/api/saved-songs", {
+      const res = await fetch("/api/songs/saved-songs", {
         credentials: "include",
       });
 
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!title || !artist) return;
 
       try {
-        const res = await fetch("/api/saved-songs", {
+        const res = await fetch("/api/songs/saved-songs", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- DELETE ---
   async function deleteSong(id) {
     try {
-      const res = await fetch(`/api/saved-songs/${id}`, {
+      const res = await fetch(`/api/songs/saved-songs/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- UPDATE ---
   async function updateSong(id, title, artist) {
     try {
-      const res = await fetch(`/api/saved-songs/${id}`, {
+      const res = await fetch(`/api/songs/saved-songs/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
