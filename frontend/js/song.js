@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const artist = btn.dataset.artist;
 
     try {
-      const res = await fetch("/api/saved-songs", {
+      const res = await fetch("/api/songs/saved-songs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
