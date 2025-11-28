@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const song_id = btn.dataset.songId;
     const title = btn.dataset.title;
     const artist = btn.dataset.artist;
+    const user_id = btn.dataset.userId; // IMPORTANT
 
     try {
       const res = await fetch("/api/songs/saved-songs", {
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ song_id, title, artist }),
+        body: JSON.stringify({ song_id, title, artist, user_id }),
       });
 
       if (!res.ok) {

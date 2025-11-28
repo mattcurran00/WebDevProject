@@ -117,7 +117,7 @@ router.delete("/saved-songs/:id", async (req, res) => {
 
 export default router;
 
-*/
+
 
 // backend/routes/songs.js
 import express from "express";
@@ -129,6 +129,7 @@ const router = express.Router();
 // SEARCH songs by title or artist
 // -------------------------------------
 
+// GET API endpoint to search songs (/api/songs/search?q=...)
 router.get("/search", async (req, res) => {
     const q = req.query.q;
 
@@ -265,5 +266,54 @@ router.delete("/saved-songs/:id", async (req, res) => {
 
   res.json({ message: "Deleted", song: data });
 });
+
+export default router;
+*/
+
+import express from "express";
+import { supabase } from "../lib/supabase.js";
+
+const router = express.Router();
+
+// SEARCH SONGS
+router.get("/search", async (req, res) => {
+  const q = req.query.q?.trim() || "";
+
+  if (!q) return res.json({ results: [] });
+
+  const { data, error } = await supabase
+    .from("songs")
+    .select("*")
+    .or(`title.ilike.%${q}%,artist.ilike.%${q}%`)
+    .limit(10);
+
+  if (error) {
+    console.error("Search error:", error);
+    return res.status(500).json({ error: "Database search failed" });
+  }
+
+  return res.json({ results: data });
+});
+
+// SAVE SONG FOR USER (user_id from your own auth)
+router.post("/saved-songs", async (req, res) => {
+  const { song_id, title, artist, user_id } = req.body;
+
+  if (!song_id || !title || !artist || !user_id) {
+    return res.status(400).json({ error: "Missing parameters" });
+  }
+
+  const { data, error } = await supabase
+    .from("saved_songs")
+    .insert([{ song_id, title, artist, user_id }]);
+
+  if (error) {
+    console.error("Insert error:", error);
+    return res.status(500).json({ error: "Could not save song" });
+  }
+
+  return res.json({ success: true, data });
+});
+
 
 export default router;

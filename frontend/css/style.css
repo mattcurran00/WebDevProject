@@ -394,16 +394,16 @@ body {
 }
 
 .search-results {
-    position: absolute;
+    position: fixed;
     top: 60px;
-    left: 20px;
+    right: 20px;
     width: 280px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 6px;
-    max-height: 200px;
+    max-height: 800px;
     overflow-y: auto;
-    z-index: 2000;
+    z-index: 1001;
 }
 
 .search-item {
@@ -413,4 +413,9 @@ body {
 
 .search-item:hover {
     background: #f0f0f0;
+}
+
+#search-results,
+#search-results * {
+    color: black !important;
 }
