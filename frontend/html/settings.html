@@ -7,8 +7,9 @@
 
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
+  <link rel="icon" type="png" href="..\images\GoldTypographyM.png">
   <link rel="stylesheet" href="../css/style.css" />
+  
 </head>
 <body>
   <!-- Top Navbar -->
@@ -25,10 +26,10 @@
     <nav class="sidebar" id="sidebar">
       <button id="toggleBtn">☰</button>
       <ul>
-        <li><a href="login.html"><i class="fa-solid fa-user"></i><span> Account</span></a></li>
-        <li><a href="index.html"><i class="fa-solid fa-home"></i><span> Home</span></a></li>
-        <li><a href="saved.html"><i class="fa-solid fa-heart"></i><span> Saved Songs</span></a></li>
-        <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
+        <li><a href="/login"><i class="fa-solid fa-user"></i><span id="sidebar-username"> Account</span></a></li>
+        <li><a href="/"><i class="fa-solid fa-home"></i><span> Home</span></a></li>
+        <li><a href="/saved"><i class="fa-solid fa-heart"></i><span> Saved Songs</span></a></li>
+        <li><a href="/settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
         <li><button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span> Sign Out</span></button></li>
       </ul>
     </nav>
@@ -40,6 +41,7 @@
     </main>
   </div>
 
+  <script src="../js/session.js"></script>
   <script src="../js/logout.js"></script>
   <script src="../js/main.js"></script>
 </body>

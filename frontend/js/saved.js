@@ -7,6 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const artistInput = document.getElementById("new-artist");
   const songIdInput = document.getElementById("new-song-id");
 
+  const editModal = document.getElementById("editModal");
+  const editTitleInput = document.getElementById("edit-title");
+  const editArtistInput = document.getElementById("edit-artist");
+  const saveEditBtn = document.getElementById("saveEdit");
+  const cancelEditBtn = document.getElementById("cancelEdit");
+
+  let currentEditId = null;
+
+
   if (!list) return;
 
   // --- LOAD SONGS (READ) ---
@@ -37,19 +46,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
       list.innerHTML = "";
 
+      item.innerHTML = `
+      <h3>${song.title}</h3>
+      <p>${song.artist}</p>
+      <small>DB id: ${song.id}</small>
+      <div class="actions">
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
+      </div>
+    `;
+
+
       songs.forEach((song) => {
         const item = document.createElement("div");
         item.className = "saved-song";
 
-        item.innerHTML = `
-          <h3>${song.title}</h3>
-          <p>${song.artist}</p>
-          <small>DB id: ${song.id}</small>
-          <div class="actions">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </div>
-        `;
+        item.querySelector(".edit-btn").addEventListener("click", () => {
+        currentEditId = song.id;
+
+        editTitleInput.value = song.title;
+        editArtistInput.value = song.artist;
+
+        editModal.classList.add("show");
+      });
+
+
 
         // DELETE
         item.querySelector(".delete-btn").addEventListener("click", () => {
@@ -159,6 +180,36 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error talking to the server.");
     }
   }
+
+  cancelEditBtn.addEventListener("click", () => {
+    editModal.classList.remove("show");
+  });
+
+  saveEditBtn.addEventListener("click", async () => {
+    const title = editTitleInput.value.trim();
+    const artist = editArtistInput.value.trim();
+
+    if (!title || !artist) {
+      alert("Both fields are required");
+      return;
+    }
+
+    const res = await fetch(`/api/songs/saved-songs/${currentEditId}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, artist })
+    });
+
+    if (!res.ok) {
+      alert("Update failed");
+      return;
+    }
+
+    editModal.classList.remove("show");
+    loadSongs(); // refresh
+  });
+
 
   // Initial load
   loadSongs();

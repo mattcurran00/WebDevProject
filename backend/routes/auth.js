@@ -8,6 +8,15 @@ const router = express.Router();
 console.log("auth.js LOADED");
 console.log(">>> USING AUTH FILE:", import.meta.url);
 
+// GET /api/auth/session - return current logged-in user
+router.get("/session", (req, res) => {
+  if (req.session && req.session.user) {
+    return res.json({ loggedIn: true, user: req.session.user });
+  }
+
+  return res.json({ loggedIn: false });
+});
+
 
 // SIGNUP
 router.post("/signup", async (req, res) => {
