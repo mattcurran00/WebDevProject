@@ -26,13 +26,14 @@ app.use(
   })
 );
 
-// --- API ROUTES (first!) ---
+// --- API ROUTES ---
 app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 
+//debufg
 console.log("Checking if server crashes...");
 
-// --- HTML routes (second) ---
+// --- HTML routes ---
 app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/html/signup.html"));
 });
@@ -55,6 +56,7 @@ app.get("/settings", (req, res) => {
 
 // --- STATIC FILES (LAST!!!) ---
 app.use(express.static(path.join(__dirname, "../frontend")));
+
 
 // --- Start server ---
 const PORT = process.env.PORT || 3000;

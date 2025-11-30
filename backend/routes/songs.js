@@ -1,11 +1,14 @@
 // backend/routes/songs.js
+// public search + private crud for saved songs
+
 import express from "express";
 import { supabase } from "../lib/supabase.js";
+import { requireAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
 /* -----------------------------------------
-   PUBLIC: Search Songs
+   PUBLIC: Search Songs (no login required)
 -------------------------------------------- */
 router.get("/search", async (req, res) => {
   const q = req.query.q?.trim() || "";
@@ -25,10 +28,14 @@ router.get("/search", async (req, res) => {
   res.json({ results: data });
 });
 
+
+
 /* -----------------------------------------
-   PRIVATE: Get Saved Songs
+   PRIVATE: Login require for below Get Saved Songs
 -------------------------------------------- */
-router.get("/saved-songs", async (req, res) => {
+
+//Get Saved Songs
+router.get("/saved-songs", requireAuth, async (req, res) => {
   if (!req.session.user)
     return res.status(401).json({ error: "Not logged in" });
 
@@ -48,10 +55,9 @@ router.get("/saved-songs", async (req, res) => {
   res.json(data);
 });
 
-/* -----------------------------------------
-   PRIVATE: Save Song
--------------------------------------------- */
-router.post("/saved-songs", async (req, res) => {
+
+//PRIVATE: Save Songs
+router.post("/saved-songs", requireAuth, async (req, res) => {
   if (!req.session.user)
     return res.status(401).json({ error: "Not logged in" });
 
@@ -75,7 +81,7 @@ router.post("/saved-songs", async (req, res) => {
 /* -----------------------------------------
    PRIVATE: Delete a saved song
 -------------------------------------------- */
-router.delete("/saved-songs/:id", async (req, res) => {
+router.delete("/saved-songs/:id", requireAuth, async (req, res) => {
   if (!req.session.user)
     return res.status(401).json({ error: "Not logged in" });
 
@@ -104,7 +110,7 @@ router.delete("/saved-songs/:id", async (req, res) => {
 /* -----------------------------------------
    PRIVATE: Update a saved song (title, artist)
 -------------------------------------------- */
-router.put("/saved-songs/:id", async (req, res) => {
+router.put("/saved-songs/:id", requireAuth, async (req, res) => {
   if (!req.session.user)
     return res.status(401).json({ error: "Not logged in" });
 
@@ -130,7 +136,5 @@ router.put("/saved-songs/:id", async (req, res) => {
 
   res.json({ success: true, updated: data });
 });
-
-
 
 export default router;

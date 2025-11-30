@@ -1,4 +1,6 @@
 // backend/routes/auth.js
+// for login, signup, logout routes
+
 import express from "express";
 import bcrypt from "bcrypt";
 import { supabase } from "../lib/supabase.js";
@@ -8,24 +10,16 @@ const router = express.Router();
 console.log("auth.js LOADED");
 console.log(">>> USING AUTH FILE:", import.meta.url);
 
-// GET /api/auth/session - return current logged-in user
-router.get("/session", (req, res) => {
-  if (req.session && req.session.user) {
-    return res.json({ loggedIn: true, user: req.session.user });
-  }
-
-  return res.json({ loggedIn: false });
-});
-
-
 // SIGNUP
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
+
   if (!username || !password)
     return res.status(400).json({ success: false, message: "Missing fields" });
 
   try {
     const password_hash = await bcrypt.hash(password, 10);
+
     const { data, error } = await supabase
       .from("users")
       .insert([{ username, password_hash }])
@@ -42,6 +36,9 @@ router.post("/signup", async (req, res) => {
 // LOGIN
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
+
+  if (!username || !password)
+    return res.status(400).json({ error: "Missing username or password" });
 
   const { data, error } = await supabase
     .from("users")
