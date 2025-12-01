@@ -31,7 +31,7 @@ router.get("/search", async (req, res) => {
 
 
 /* -----------------------------------------
-   PRIVATE: Login require for below Get Saved Songs
+   PRIVATE Routes: 
 -------------------------------------------- */
 
 //Get Saved Songs
@@ -78,9 +78,8 @@ router.post("/saved-songs", requireAuth, async (req, res) => {
   res.json({ success: true, data });
 });
 
-/* -----------------------------------------
-   PRIVATE: Delete a saved song
--------------------------------------------- */
+
+//PRIVATE: Delete a saved song
 router.delete("/saved-songs/:id", requireAuth, async (req, res) => {
   if (!req.session.user)
     return res.status(401).json({ error: "Not logged in" });
@@ -107,9 +106,8 @@ router.delete("/saved-songs/:id", requireAuth, async (req, res) => {
   res.json({ success: true, deleted: data });
 });
 
-/* -----------------------------------------
-   PRIVATE: Update a saved song (title, artist)
--------------------------------------------- */
+
+//PRIVATE: Update a saved song (title, artist)  
 router.put("/saved-songs/:id", requireAuth, async (req, res) => {
   if (!req.session.user)
     return res.status(401).json({ error: "Not logged in" });
