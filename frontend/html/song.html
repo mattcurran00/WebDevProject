@@ -1,24 +1,63 @@
 <!-- Page to display individual songs when selected by the user -->
 <!-- Main to be filled in dynamically using JS -->
 <!-- Structure and features TBD cos idk what the plan even is tbh -->
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../css/style.css"/>
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Musicker</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    window.supabase = supabase.createClient(
+      "https://flvbwuqktogpovnohizm.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdmJ3dXFrdG9ncG92bm9oaXptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MTIyMTksImV4cCI6MjA3ODk4ODIxOX0.EA2Ioo_LMfIwg50ZMbU-g8lNv9wB1SxcAUCu6Ay1Pm0"
+  );
+</script>
+
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" type="png" href="..\images\GoldTypographyM.png">
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-<header>
-    <a href="/">Back</a>
-    <h1 id="songTitle"></h1>
-    <p id="songArtist"></p>
-</header>
-<main>
-    <!--might implement sum to choose between chords and tabs -->
-</main>
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="..\images\GoldTypographyM.png" alt="Musicker Logo" />
+      <h1>usicker</h1>
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Search songs or artists" class="search-bar" />
+      <button class="search-button"><i class="fa-solid fa-search"></i></button>    
+    </div>
+      
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <button id="toggleBtn">☰</button>
+      <ul>
+        <li><a href="/login"><i class="fa-solid fa-user"></i><span id="sidebar-username"> Account</span></a></li>
+        <li><a href="/"><i class="fa-solid fa-home"></i><span> Home</span></a></li>
+        <li><a href="/saved"><i class="fa-solid fa-heart"></i><span> Saved Songs</span></a></li>
+        <li><a href="/settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
+        <li><button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span> Sign Out</span></button></li>
+      </ul>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <h1>Song Details</h1>
+      <p>Discover tabs, chords, and songs with ease.</p>
+      <div id="chord-container"></div>
+    </main>
+  </div>
+
+  <script src="../js/session.js"></script>
+  <script src="../js/logout.js"></script>
+  <script src="../js/main.js"></script>
 
 </body>
 </html>
