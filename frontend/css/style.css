@@ -226,7 +226,7 @@ body {
   align-items: center;
 }
 
-  /* ===== Saved Songs Page ===== */
+  /* Saved Songs Page */
 
 .saved-wrapper {
   max-width: 900px;
@@ -438,7 +438,7 @@ body {
   background: rgba(255, 0, 0, 0.2);
 }
 
-/* ===== MODAL BASE ===== */
+/* Modal Base */
 .modal {
   position: fixed;
   top: 0;
@@ -513,4 +513,41 @@ body {
   border-radius: 6px;
   color: white;
   cursor: pointer;
+}
+
+
+/* CSS for chord display */
+#chord-container {
+  font-family: system-ui, sans-serif;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.chord-key {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.chord-section {
+  margin-top: 1.5rem;
+}
+
+.chord-section h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.chord-line {
+  display: flex;
+  gap: 0.75rem;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+.chord {
+  padding: 0.25rem 0.5rem;
+  background: #f4f4f4;
+  border-radius: 4px;
 }
