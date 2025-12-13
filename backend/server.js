@@ -54,7 +54,11 @@ app.get("/settings", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/html/settings.html"));
 });
 
-// --- STATIC FILES (LAST!!!) ---
+app.get("/song", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/html/song.html"));
+});
+
+// --- STATIC FILES ---
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 

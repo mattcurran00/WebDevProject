@@ -59,7 +59,7 @@ async function renderSongs(append = false) {
   songs.forEach((song) => {
     const a = document.createElement("a");
     a.className = "song-card";
-    a.href = `/song.html?id=${encodeURIComponent(song.id)}`;
+    a.href = `/song?id=${encodeURIComponent(song.id)}`;
     a.setAttribute("aria-label", `${song.title} by ${song.artist}`);
     a.innerHTML = `
         <strong>${escapeHtml(song.title)}</strong>
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Database test section
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("testBtn");
   const results = document.getElementById("testResults");
   if (!btn || !results) return;  // page doesn't have section
@@ -135,5 +135,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
+*/
