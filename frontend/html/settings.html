@@ -3,41 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Musicker</title>
+  <title>Musicker | Settings</title>
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="icon" type="png" href="..\images\GoldTypographyM.png">
+  <link rel="icon" type="png" href="../images/GoldTypographyM.png">
   <link rel="stylesheet" href="../css/style.css" />
-  
+  <link rel="stylesheet" href="../css/settings.css" />
+
 </head>
 <body>
+
   <!-- Top Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="..\images\GoldTypographyM.png" alt="Musicker Logo" />
+      <img src="../images/GoldTypographyM.png" alt="Musicker Logo" />
       <h1>usicker</h1>
     </div>
     <input type="text" placeholder="Search songs or artists" class="search-bar" />
   </header>
 
   <div class="container">
+
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
       <button id="toggleBtn">☰</button>
       <ul>
-        <li><a href="/login"><i class="fa-solid fa-user"></i><span id="sidebar-username"> Account</span></a></li>
+        <li><a href="/login"><i class="fa-solid fa-user"></i><span> Account</span></a></li>
         <li><a href="/"><i class="fa-solid fa-home"></i><span> Home</span></a></li>
         <li><a href="/saved"><i class="fa-solid fa-heart"></i><span> Saved Songs</span></a></li>
-        <li><a href="/settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
-        <li><button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span> Sign Out</span></button></li>
+        <li><a href="/settings" class="active"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
+        <li>
+          <button id="logoutBtn" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i><span> Sign Out</span>
+          </button>
+        </li>
       </ul>
     </nav>
 
-    <!-- Main content -->
+    <!-- Main Content -->
     <main class="main-content">
       <h1>Settings</h1>
-      <p>Manage your account settings and preferences here.</p>
+      <p>Manage your account and preferences.</p>
+
+      <!-- Account Settings -->
+      <section class="settings-section">
+        <h2><i class="fa-solid fa-user"></i> Account</h2>
+
+        <label>Email</label>
+        <input type="email" id="email" disabled />
+
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Change username" />
+
+        <button class="primary-btn">Save Changes</button>
+      </section>
+
+      <!-- Preferences -->
+      <section class="settings-section">
+        <h2><i class="fa-solid fa-sliders"></i> Preferences</h2>
+
+        <div class="setting-row">
+          <span>Dark Mode</span>
+          <input type="checkbox" id="darkModeToggle" />
+        </div>
+
+        <div class="setting-row">
+          <span>Show Chord Diagrams</span>
+          <input type="checkbox" checked />
+        </div>
+      </section>
+
+      <!-- Danger Zone -->
+      <section class="settings-section danger">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h2>
+
+        <button id="deleteAccountBtn" class="danger-btn">Delete Account</button>
+
+      </section>
+
     </main>
   </div>
 
