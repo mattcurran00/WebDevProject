@@ -8,6 +8,11 @@ dotenv.config();
 
 import authRoutes from "./routes/auth.js";
 import songRoutes from "./routes/songs.js";
+import settingsRoutes from "./routes/settingsROUTE.js";  //route for feleting teh account in settings
+import userRoutes from "./routes/user.js";
+
+
+
 
 const app = express();
 const __dirname = path.resolve();
@@ -29,6 +34,10 @@ app.use(
 // --- API ROUTES ---
 app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
+app.use("/settings", settingsRoutes);
+app.use("/api/user", userRoutes);
+
+
 
 //debufg
 console.log("Checking if server crashes...");
