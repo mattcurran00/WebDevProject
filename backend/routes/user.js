@@ -12,7 +12,7 @@ router.put("/username", async (req, res) => {
   const userId = req.session.user.id;
 
   const { error } = await supabase
-    .from("profiles")
+    .from("users")
     .update({ username })
     .eq("id", userId);
 

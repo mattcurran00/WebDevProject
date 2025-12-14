@@ -31,6 +31,16 @@ app.use(
   })
 );
 
+/**
+ * for debugginh cos i cant see the databse and idk wtf is going on
+ */
+
+app.use((req, res, next) => { 
+  console.log("REQ:", req.method, req.url);
+  next();
+});
+
+
 // --- API ROUTES ---
 app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
@@ -59,7 +69,7 @@ app.get("/saved", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/html/saved.html"));
 });
 
-app.get("/settings", (req, res) => {
+app.get("/settings", authRoutes, (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/html/settings.html"));
 });
 
