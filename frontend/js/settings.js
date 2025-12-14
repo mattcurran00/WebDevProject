@@ -1,12 +1,32 @@
 console.log("SETTINGS JS LOADED");
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const saveBtn = document.getElementById("saveChangesBtn");
   const deleteBtn = document.getElementById("deleteAccountBtn");
   const usernameInput = document.getElementById("username");
 
   if (!saveBtn || !deleteBtn || !usernameInput) {
     console.error("Settings elements missing");
+    return;
+  }
+
+  // Ensure the user is authenticated before showing settings
+  try {
+    const res = await fetch("/api/auth/session", { credentials: "include" });
+    if (!res.ok) throw new Error("Session check failed");
+
+    const data = await res.json();
+    if (!data.loggedIn) {
+      window.location.href = "/login";
+      return;
+    }
+
+    if (data.user?.username) {
+      usernameInput.value = data.user.username;
+    }
+  } catch (err) {
+    console.error("Could not verify session:", err);
+    window.location.href = "/login";
     return;
   }
 
