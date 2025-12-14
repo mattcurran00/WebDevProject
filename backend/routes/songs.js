@@ -135,4 +135,22 @@ router.put("/saved-songs/:id", requireAuth, async (req, res) => {
   res.json({ success: true, updated: data });
 });
 
+// Get Chords for a Song (public)
+router.get("/:id/chords", async (req, res) => {
+  const { id } = req.params;
+
+  const { data, error } = await supabase
+    .from("song_chords")
+    .select("chords")
+    .eq("song_id", id)
+    .single();
+
+  if (error || !data) {
+    return res.status(404).send("Chords not found");
+  }
+
+  res.send(data.chords); // plain text
+});
+
+
 export default router;
